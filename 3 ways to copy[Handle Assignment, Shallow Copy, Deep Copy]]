@@ -1,0 +1,96 @@
+Mentioned all 3 methods below
+//Handle Assignment [Only pointers are copied not the objects] 
+class sample;
+  bit[7:0] v;  
+endclass
+
+module top;
+  
+  sample s1=new();
+  sample s2;
+  initial begin
+    s1.v=10;
+    $display("s1.var= %d",s1.v);
+    s2=s1;
+    $display("s2.var= %d",s2.v);
+    s2.v=20;
+    $display("s1.var= %d",s1.v);
+  end
+endmodule
+//=====================Results=============================
+# s1.var=  10
+# s2.var=  10
+# s1.var=  20
+
+//Shallow Copy [Subclass objects are not copyied]
+class sub;
+  bit[7:0] obj;
+endclass
+class sample ;
+  bit[7:0] data;
+  sub sub_h=new();
+endclass
+
+
+module top;
+  sample s1,s2;
+  initial begin
+    s1=new();
+    s1.data=10;
+    s1.sub_h.obj=5;
+    $display("s1.data= %d",s1.data);
+    $display("s1.sub_h.obj= %d",s1.sub_h.obj);
+    
+    s2=new s1;
+    $display("s2.data= %d, s2.sub_h.obj= %d",s2.data, s2.sub_h.obj);
+    s2.sub_h.obj=10;
+    s2.data=5;
+    s1.data=15;
+    $display("s2.data= %d, s2.sub_h.obj= %d",s2.data, s2.sub_h.obj);
+    $display("s1.data= %d, s1.sub_h.obj= %d",s1.data, s1.sub_h.obj);
+  end
+endmodule
+//===============================Results===============================
+# s1.data=  10
+# s1.sub_h.obj=   5
+# s2.data=  10, s2.sub_h.obj=   5
+# s2.data=   5, s2.sub_h.obj=  10
+# s1.data=  15, s1.sub_h.obj=  10
+
+//Deep Class [Both class and Subclass's objects are copied]
+class subclass;
+  	int obj;
+  function subclass copy();
+    copy=new();
+    copy.obj=this.obj;
+  endfunction
+endclass
+class sample;
+  int data;
+  subclass subh=new();
+  
+  function sample copy();
+    copy=new();
+    copy.data=this.data;
+    copy.subh=subh.copy;
+  endfunction
+endclass
+
+module top;
+  sample s1, s2;
+  initial begin
+    s1=new();
+    s1.data=10;
+    s1.subh.obj=5;
+    $display("s1.data=%d, s1.subh.obj= %d",s1.data, s1.subh.obj);
+    
+    s2=s1.copy();
+    s2.data=5;
+    s2.subh.obj=10;
+    $display("s2.data=%d, s2.subh.obj= %d",s2.data, s2.subh.obj);
+    
+  end
+endmodule
+//=============================Results===============================
+# s1.data=         10, s1.subh.obj=           5
+# s2.data=          5, s2.subh.obj=          10
