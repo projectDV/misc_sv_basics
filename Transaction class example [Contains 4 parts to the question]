@@ -1,0 +1,140 @@
+A) Declare APB txn class 
+    -Declare addr(8bit), data(15 bits), wr_rd(1 bit).
+    -Implement print, copy and compare menthods.
+    -write a constraint to generate 4 byte  boundary alinged address.
+B) Instantiate apb_tx in module top
+  -Allocate memory, randomize and print.
+//================CODE================================================
+  class apb_tx;
+  rand bit [7:0]addr;
+  rand bit [15:0] data;
+  rand bit wr_rd;
+  function void print(string name= "apb_tx");
+    $display("printing %s", name);
+    $display("Address= %h",addr);
+    $display("Data= %h",data);
+    $display("WR_RD= %s",wr_rd ? "WR" : "RD");
+  endfunction
+  
+  function void copy(output apb_tx tx);
+    tx=new this;
+  endfunction 
+  
+  function bit compare(input apb_tx tx);
+    if(tx.addr==addr && tx.data==data && tx.wr_rd==wr_rd)
+      return 1;
+    else
+      return 0;
+  endfunction
+  
+  constraint apb_tx_c{ addr%4==0;}
+  
+endclass
+module top;
+  apb_tx tx=new();
+  initial begin 
+    assert(tx.randomize());
+    tx.print("apb_tx after randomization");
+  end
+endmodule
+//======================Result=======================
+# printing apb_tx after randomization
+# Address= f8
+# Data= 1820
+# WR_RD= WR
+
+C) Define an array of apb_tx class with array size as 5.
+  -Allocate memory and randomize all object of array 
+D) Define anothe array of apb_tx class with array size as 5.
+  -Use copy method above to copy 1st arr object to 2nd arr.
+  -Use compare method to compare object of both the arrays.
+//=======================CODE===============================
+class apb_tx;
+  rand bit [7:0]addr;
+  rand bit [15:0] data;
+  rand bit wr_rd;
+  function void print(string name= "apb_tx", int i);
+    $display("printing %s, Arr=%d", name, i);
+    $display("Address= %h",addr);
+    $display("Data= %h",data);
+    $display("WR_RD= %s",wr_rd ? "WR" : "RD");
+  endfunction
+  
+  function void copy(output apb_tx tx);
+    tx=new this;
+  endfunction 
+  
+  function bit compare(input apb_tx tx);
+    if(tx.addr==addr && tx.data==data && tx.wr_rd==wr_rd)
+      return 1;
+    else
+      return 0;
+  endfunction
+  
+  constraint apb_tx_c{ addr%4==0;}
+  
+endclass
+module top;
+  
+  apb_tx tx_a[4:0];
+  apb_tx tx_b[4:0];
+  
+  initial begin 
+    for(int i=0;i<5;i++) begin
+      tx_a[i]=new();
+      assert(tx_a[i].randomize());
+      tx_a[i].copy(tx_b[i]);
+      tx_a[i].print("apb_tx_A after randomization",i);
+      tx_b[i].print("apb_tx_B after randomization",i);
+      assert(tx_a[i].compare(tx_b[i]));
+      $display("============tx_a[%0d] & tx_b[%0d] are matched==========",i,i);
+    end
+  end
+endmodule
+//==========================Result==================================
+# printing apb_tx_A after randomization, Arr=          0
+# Address= 9c
+# Data= 447b
+# WR_RD= WR
+# printing apb_tx_B after randomization, Arr=          0
+# Address= 9c
+# Data= 447b
+# WR_RD= WR
+# ============tx_a[0] & tx_b[0] are matched==========
+# printing apb_tx_A after randomization, Arr=          1
+# Address= 44
+# Data= e247
+# WR_RD= RD
+# printing apb_tx_B after randomization, Arr=          1
+# Address= 44
+# Data= e247
+# WR_RD= RD
+# ============tx_a[1] & tx_b[1] are matched==========
+# printing apb_tx_A after randomization, Arr=          2
+# Address= 94
+# Data= 30c7
+# WR_RD= RD
+# printing apb_tx_B after randomization, Arr=          2
+# Address= 94
+# Data= 30c7
+# WR_RD= RD
+# ============tx_a[2] & tx_b[2] are matched==========
+# printing apb_tx_A after randomization, Arr=          3
+# Address= ec
+# Data= 2141
+# WR_RD= RD
+# printing apb_tx_B after randomization, Arr=          3
+# Address= ec
+# Data= 2141
+# WR_RD= RD
+# ============tx_a[3] & tx_b[3] are matched==========
+# printing apb_tx_A after randomization, Arr=          4
+# Address= 44
+# Data= f875
+# WR_RD= RD
+# printing apb_tx_B after randomization, Arr=          4
+# Address= 44
+# Data= f875
+# WR_RD= RD
+# ============tx_a[4] & tx_b[4] are matched==========
+
