@@ -16,5 +16,5 @@ class mem_ctrl_cov;
      	bins range_2={[7:10]};
      	bins range_3={[10:13]};
     }
-    endcovergroup
+    endgroup
 endclass
