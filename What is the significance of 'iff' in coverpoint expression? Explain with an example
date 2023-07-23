@@ -1,0 +1,20 @@
+-Assume a memory controller which supports SDRAM and flash memory.
+-If I need to perform coverage for any specific memory type, let suppose for SDRAM. Then, it should only sample for SDRAM not flash memory.
+-This helps us declutter and avoids creating redundant coverages.
+//===================EXAMPLE=====================
+class mem_ctrl_cov;
+  covergroup mem_ctrl_cg
+    CP_ADDR_SDRAM: coverpoint tx.addr iff(tx.mem_type== SDRAM)
+    {	bins range_0={[0:3]};
+     	bins range_1={[3:7]};
+     	bins range_2={[7:10]};
+     	bins range_3={[10:13]};
+    }
+    CP_ADDR_FLASH: coverpoint tx.addr iff(tx.mem_type=FLASH)
+    {	bins range_0={[0:3]};
+     	bins range_1={[3:7]};
+     	bins range_2={[7:10]};
+     	bins range_3={[10:13]};
+    }
+    endcovergroup
+endclass
