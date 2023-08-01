@@ -1,0 +1,241 @@
+class sample;
+  bit [9:0] v_a;
+  covergroup cg;
+    coverpoint v_a{
+      bins a={[0:63], 65};
+      bins b[]={[127:150],[148:191]};
+      bins c[]={200,201,202};
+      bins d={[1000:$]};
+      bins others[]=default;
+    }
+  endgroup
+  function new();
+    cg=new();
+  endfunction
+endclass
+module top;
+  sample s=new();
+  
+  initial begin
+    repeat(20) begin
+      s.v_a=$urandom;
+      s.cg.sample();
+    end
+  end
+endmodule
+//=================================Result=================================
+=================================================================================
+# === Instance: /testbench_sv_unit
+# === Design Unit: work.testbench_sv_unit
+# =================================================================================
+# 
+# Covergroup Coverage:
+#     Covergroups                      1        na        na     2.85%
+#         Coverpoints/Crosses          1        na        na        na
+#             Covergroup Bins         70         2        68     2.85%
+# ----------------------------------------------------------------------------------------------------------
+# Covergroup                                             Metric       Goal       Bins    Status               
+#                                                                                                          
+# ----------------------------------------------------------------------------------------------------------
+#  TYPE /testbench_sv_unit/sample/cg                      2.85%        100          -    Uncovered            
+#     covered/total bins:                                     2         70          -                      
+#     missing/total bins:                                    68         70          -                      
+#     % Hit:                                              2.85%        100          -                      
+#     Coverpoint v_a                                      2.85%        100          -    Uncovered            
+#         covered/total bins:                                 2         70          -                      
+#         missing/total bins:                                68         70          -                      
+#         % Hit:                                          2.85%        100          -                      
+#         bin a                                               1          1          -    Covered              
+#         bin b[127]                                          0          1          -    ZERO                 
+#         bin b[128]                                          0          1          -    ZERO                 
+#         bin b[129]                                          0          1          -    ZERO                 
+#         bin b[130]                                          0          1          -    ZERO                 
+#         bin b[131]                                          0          1          -    ZERO                 
+#         bin b[132]                                          0          1          -    ZERO                 
+#         bin b[133]                                          0          1          -    ZERO                 
+#         bin b[134]                                          0          1          -    ZERO                 
+#         bin b[135]                                          0          1          -    ZERO                 
+#         bin b[136]                                          0          1          -    ZERO                 
+#         bin b[137]                                          0          1          -    ZERO                 
+#         bin b[138]                                          0          1          -    ZERO                 
+#         bin b[139]                                          0          1          -    ZERO                 
+#         bin b[140]                                          0          1          -    ZERO                 
+#         bin b[141]                                          0          1          -    ZERO                 
+#         bin b[142]                                          0          1          -    ZERO                 
+#         bin b[143]                                          0          1          -    ZERO                 
+#         bin b[144]                                          0          1          -    ZERO                 
+#         bin b[145]                                          0          1          -    ZERO                 
+#         bin b[146]                                          0          1          -    ZERO                 
+#         bin b[147]                                          0          1          -    ZERO                 
+#         bin b[148]                                          0          1          -    ZERO                 
+#         bin b[149]                                          0          1          -    ZERO                 
+#         bin b[150]                                          0          1          -    ZERO                 
+#         bin b[151]                                          0          1          -    ZERO                 
+#         bin b[152]                                          0          1          -    ZERO                 
+#         bin b[153]                                          0          1          -    ZERO                 
+#         bin b[154]                                          0          1          -    ZERO                 
+#         bin b[155]                                          0          1          -    ZERO                 
+#         bin b[156]                                          0          1          -    ZERO                 
+#         bin b[157]                                          0          1          -    ZERO                 
+#         bin b[158]                                          0          1          -    ZERO                 
+#         bin b[159]                                          0          1          -    ZERO                 
+#         bin b[160]                                          0          1          -    ZERO                 
+#         bin b[161]                                          0          1          -    ZERO                 
+#         bin b[162]                                          0          1          -    ZERO                 
+#         bin b[163]                                          0          1          -    ZERO                 
+#         bin b[164]                                          0          1          -    ZERO                 
+#         bin b[165]                                          0          1          -    ZERO                 
+#         bin b[166]                                          0          1          -    ZERO                 
+#         bin b[167]                                          0          1          -    ZERO                 
+#         bin b[168]                                          0          1          -    ZERO                 
+#         bin b[169]                                          0          1          -    ZERO                 
+#         bin b[170]                                          0          1          -    ZERO                 
+#         bin b[171]                                          0          1          -    ZERO                 
+#         bin b[172]                                          0          1          -    ZERO                 
+#         bin b[173]                                          0          1          -    ZERO                 
+#         bin b[174]                                          1          1          -    Covered              
+#         bin b[175]                                          0          1          -    ZERO                 
+#         bin b[176]                                          0          1          -    ZERO                 
+#         bin b[177]                                          0          1          -    ZERO                 
+#         bin b[178]                                          0          1          -    ZERO                 
+#         bin b[179]                                          0          1          -    ZERO                 
+#         bin b[180]                                          0          1          -    ZERO                 
+#         bin b[181]                                          0          1          -    ZERO                 
+#         bin b[182]                                          0          1          -    ZERO                 
+#         bin b[183]                                          0          1          -    ZERO                 
+#         bin b[184]                                          0          1          -    ZERO                 
+#         bin b[185]                                          0          1          -    ZERO                 
+#         bin b[186]                                          0          1          -    ZERO                 
+#         bin b[187]                                          0          1          -    ZERO                 
+#         bin b[188]                                          0          1          -    ZERO                 
+#         bin b[189]                                          0          1          -    ZERO                 
+#         bin b[190]                                          0          1          -    ZERO                 
+#         bin b[191]                                          0          1          -    ZERO                 
+#         bin c[200]                                          0          1          -    ZERO                 
+#         bin c[201]                                          0          1          -    ZERO                 
+#         bin c[202]                                          0          1          -    ZERO                 
+#         bin d                                               0          1          -    ZERO                 
+#         default bin others[103]                             1                     -    Occurred             
+#         default bin others[106]                             1                     -    Occurred             
+#         default bin others[198]                             1                     -    Occurred             
+#         default bin others[314]                             1                     -    Occurred             
+#         default bin others[358]                             1                     -    Occurred             
+#         default bin others[381]                             1                     -    Occurred             
+#         default bin others[436]                             1                     -    Occurred             
+#         default bin others[517]                             1                     -    Occurred             
+#         default bin others[565]                             1                     -    Occurred             
+#         default bin others[582]                             1                     -    Occurred             
+#         default bin others[598]                             1                     -    Occurred             
+#         default bin others[623]                             1                     -    Occurred             
+#         default bin others[814]                             1                     -    Occurred             
+#         default bin others[882]                             1                     -    Occurred             
+#         default bin others[950]                             1                     -    Occurred             
+#         default bin others[952]                             1                     -    Occurred             
+#         default bin others[980]                             1                     -    Occurred             
+#         default bin others[987]                             1                     -    Occurred             
+# 
+# COVERGROUP COVERAGE:
+# ----------------------------------------------------------------------------------------------------------
+# Covergroup                                             Metric       Goal       Bins    Status               
+#                                                                                                          
+# ----------------------------------------------------------------------------------------------------------
+#  TYPE /testbench_sv_unit/sample/cg                      2.85%        100          -    Uncovered            
+#     covered/total bins:                                     2         70          -                      
+#     missing/total bins:                                    68         70          -                      
+#     % Hit:                                              2.85%        100          -                      
+#     Coverpoint v_a                                      2.85%        100          -    Uncovered            
+#         covered/total bins:                                 2         70          -                      
+#         missing/total bins:                                68         70          -                      
+#         % Hit:                                          2.85%        100          -                      
+#         bin a                                               1          1          -    Covered              
+#         bin b[127]                                          0          1          -    ZERO                 
+#         bin b[128]                                          0          1          -    ZERO                 
+#         bin b[129]                                          0          1          -    ZERO                 
+#         bin b[130]                                          0          1          -    ZERO                 
+#         bin b[131]                                          0          1          -    ZERO                 
+#         bin b[132]                                          0          1          -    ZERO                 
+#         bin b[133]                                          0          1          -    ZERO                 
+#         bin b[134]                                          0          1          -    ZERO                 
+#         bin b[135]                                          0          1          -    ZERO                 
+#         bin b[136]                                          0          1          -    ZERO                 
+#         bin b[137]                                          0          1          -    ZERO                 
+#         bin b[138]                                          0          1          -    ZERO                 
+#         bin b[139]                                          0          1          -    ZERO                 
+#         bin b[140]                                          0          1          -    ZERO                 
+#         bin b[141]                                          0          1          -    ZERO                 
+#         bin b[142]                                          0          1          -    ZERO                 
+#         bin b[143]                                          0          1          -    ZERO                 
+#         bin b[144]                                          0          1          -    ZERO                 
+#         bin b[145]                                          0          1          -    ZERO                 
+#         bin b[146]                                          0          1          -    ZERO                 
+#         bin b[147]                                          0          1          -    ZERO                 
+#         bin b[148]                                          0          1          -    ZERO                 
+#         bin b[149]                                          0          1          -    ZERO                 
+#         bin b[150]                                          0          1          -    ZERO                 
+#         bin b[151]                                          0          1          -    ZERO                 
+#         bin b[152]                                          0          1          -    ZERO                 
+#         bin b[153]                                          0          1          -    ZERO                 
+#         bin b[154]                                          0          1          -    ZERO                 
+#         bin b[155]                                          0          1          -    ZERO                 
+#         bin b[156]                                          0          1          -    ZERO                 
+#         bin b[157]                                          0          1          -    ZERO                 
+#         bin b[158]                                          0          1          -    ZERO                 
+#         bin b[159]                                          0          1          -    ZERO                 
+#         bin b[160]                                          0          1          -    ZERO                 
+#         bin b[161]                                          0          1          -    ZERO                 
+#         bin b[162]                                          0          1          -    ZERO                 
+#         bin b[163]                                          0          1          -    ZERO                 
+#         bin b[164]                                          0          1          -    ZERO                 
+#         bin b[165]                                          0          1          -    ZERO                 
+#         bin b[166]                                          0          1          -    ZERO                 
+#         bin b[167]                                          0          1          -    ZERO                 
+#         bin b[168]                                          0          1          -    ZERO                 
+#         bin b[169]                                          0          1          -    ZERO                 
+#         bin b[170]                                          0          1          -    ZERO                 
+#         bin b[171]                                          0          1          -    ZERO                 
+#         bin b[172]                                          0          1          -    ZERO                 
+#         bin b[173]                                          0          1          -    ZERO                 
+#         bin b[174]                                          1          1          -    Covered              
+#         bin b[175]                                          0          1          -    ZERO                 
+#         bin b[176]                                          0          1          -    ZERO                 
+#         bin b[177]                                          0          1          -    ZERO                 
+#         bin b[178]                                          0          1          -    ZERO                 
+#         bin b[179]                                          0          1          -    ZERO                 
+#         bin b[180]                                          0          1          -    ZERO                 
+#         bin b[181]                                          0          1          -    ZERO                 
+#         bin b[182]                                          0          1          -    ZERO                 
+#         bin b[183]                                          0          1          -    ZERO                 
+#         bin b[184]                                          0          1          -    ZERO                 
+#         bin b[185]                                          0          1          -    ZERO                 
+#         bin b[186]                                          0          1          -    ZERO                 
+#         bin b[187]                                          0          1          -    ZERO                 
+#         bin b[188]                                          0          1          -    ZERO                 
+#         bin b[189]                                          0          1          -    ZERO                 
+#         bin b[190]                                          0          1          -    ZERO                 
+#         bin b[191]                                          0          1          -    ZERO                 
+#         bin c[200]                                          0          1          -    ZERO                 
+#         bin c[201]                                          0          1          -    ZERO                 
+#         bin c[202]                                          0          1          -    ZERO                 
+#         bin d                                               0          1          -    ZERO                 
+#         default bin others[103]                             1                     -    Occurred             
+#         default bin others[106]                             1                     -    Occurred             
+#         default bin others[198]                             1                     -    Occurred             
+#         default bin others[314]                             1                     -    Occurred             
+#         default bin others[358]                             1                     -    Occurred             
+#         default bin others[381]                             1                     -    Occurred             
+#         default bin others[436]                             1                     -    Occurred             
+#         default bin others[517]                             1                     -    Occurred             
+#         default bin others[565]                             1                     -    Occurred             
+#         default bin others[582]                             1                     -    Occurred             
+#         default bin others[598]                             1                     -    Occurred             
+#         default bin others[623]                             1                     -    Occurred             
+#         default bin others[814]                             1                     -    Occurred             
+#         default bin others[882]                             1                     -    Occurred             
+#         default bin others[950]                             1                     -    Occurred             
+#         default bin others[952]                             1                     -    Occurred             
+#         default bin others[980]                             1                     -    Occurred             
+#         default bin others[987]                             1                     -    Occurred             
+# 
+# TOTAL COVERGROUP COVERAGE: 2.85%  COVERGROUP TYPES: 1
+# 
+# Total Coverage By Instance (filtered view): 2.85%
