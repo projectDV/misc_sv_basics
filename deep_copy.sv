@@ -19,13 +19,19 @@ class parent;
 endclass
 module top;
     parent p=new();
+  subclass s=new();
     initial begin
         p.copy();
+      	p.y=400;
+      	p.s.x=300;
+      	p.copy();
     end
 endmodule
 ===========================RESULT============================
-# Allocation: Simulator allocated 4746 kB (elbread=455 elab2=4146 kernel=144 sdf=0)
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 4747 kB (elbread=455 elab2=4147 kernel=144 sdf=0)
 # KERNEL: ASDB file was created in location /home/runner/dataset.asdb
 # KERNEL:         200'{x:100}
+# KERNEL:         400'{x:300}
 # KERNEL: Simulation has finished. There are no more test vectors to simulate.
 # VSIM: Simulation has finished.
